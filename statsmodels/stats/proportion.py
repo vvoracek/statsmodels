@@ -259,6 +259,9 @@ def proportion_confint(count, nobs, alpha:float=0.05, method="normal"):
                 ci_low.flat[index] = 1 - temp
             index = bcast.index
     elif method == "beta":
+        if(count_a == 0):
+            return 1-alpha_2**(1/nobs) 
+        
         ci_low = stats.beta.ppf(alpha_2, count_a, nobs_a - count_a + 1)
         ci_upp = stats.beta.isf(alpha_2, count_a + 1, nobs_a - count_a)
 
